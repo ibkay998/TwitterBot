@@ -65,9 +65,9 @@ while True:
                     final_result = round(float(sell2) / float(sell1), 6) * amount
                     reply=f"{amount} {from_currency} to {to_currency} is {final_result} {name2}"
                     client.create_tweet(in_reply_to_tweet_id=tweet.id,text=reply)
-                # if len(full_text) == 1:
-                #     print("entered one input")
-                #     client.create_tweet(in_reply_to_tweet_id=tweet.id,text="You mentioned the twitter bot handle without placing an isocode e.g @streetrates ngn")
+                if len(full_text) == 1:
+                    print("entered one input")
+                    client.create_tweet(in_reply_to_tweet_id=tweet.id,text="You mentioned the twitter bot handle without placing an isocode e.g @streetrates 10 GBP to USD")
                     
                 # elif len(full_text) == 2:
                 #     print("entered two input")
