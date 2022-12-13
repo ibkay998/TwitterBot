@@ -23,6 +23,7 @@ now = datetime.now()
 utc=pytz.UTC
 endpoint_base = "https://api.streetrates.hng.tech/api/currency/currency/"
 client_id=client.get_me().data.id
+print(client_id)
 start_id = 1
 initialisation_resp = client.get_users_mentions(client_id)
 if initialisation_resp.data != None:
@@ -34,9 +35,11 @@ while True:
             try:
                 full_text = tweet.text.split(" ")
                 if len(full_text) == 1:
+                    print("entered one input")
                     client.create_tweet(in_reply_to_tweet_id=tweet.id,text="You mentioned the twitter bot handle without placing an isocode e.g @streetrates ngn")
                     
                 elif len(full_text) == 2:
+                    print("entered two input")
                     first = full_text[1].upper()
                     url = f"{endpoint_base}{first}"
                     response = requests.get(url)
@@ -50,6 +53,7 @@ while True:
                     client.create_tweet(in_reply_to_tweet_id=tweet.id,text=reply)
                     
                 elif len(full_text) == 3:
+                     print("entered three input")
                     from_currency = full_text[1].upper()
                     to_currency = full_text[2].upper()
                     url1 = f"{endpoint_base}{from_currency}"
