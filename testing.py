@@ -53,7 +53,7 @@ while True:
                     client.create_tweet(in_reply_to_tweet_id=tweet.id,text=reply)
                     
                 elif len(full_text) == 3:
-                     print("entered three input")
+                    print("entered three input")
                     from_currency = full_text[1].upper()
                     to_currency = full_text[2].upper()
                     url1 = f"{endpoint_base}{from_currency}"
