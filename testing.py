@@ -34,28 +34,19 @@ while True:
         for tweet in response.data:
             try:
                 full_text = tweet.text.split(" ")
-                if len(full_text) == 1:
-                    print("entered one input")
-                    client.create_tweet(in_reply_to_tweet_id=tweet.id,text="You mentioned the twitter bot handle without placing an isocode e.g @streetrates ngn")
-                    
-                elif len(full_text) == 2:
-                    print("entered two input")
-                    first = full_text[1].upper()
-                    url = f"{endpoint_base}{first}"
-                    response = requests.get(url)
-                    data = response.json()
-                    name = data["data"]["name"]
-                    if data["success"]:
-                        sell = data["data"]["rate"]["parallel_sell"]
-                    else:
-                        print("request failed")
-                    reply=f"One USD to {first} is {sell} {name}"
-                    client.create_tweet(in_reply_to_tweet_id=tweet.id,text=reply)
-                    
-                elif len(full_text) == 3:
-                    print("entered three input")
-                    from_currency = full_text[1].upper()
-                    to_currency = full_text[2].upper()
+                if len(full_text) == 5:
+                    print("entered correct 5 input")
+                    try:
+                        amount = float(full_text[1])
+                    except error:
+                        try:
+                            amount = int(full_text[1])
+                        except error:
+                            print("Invalid amount")
+                            client.create_tweet(in_reply_to_tweet_id=tweet.id,text="You mentioned the twitter bot handle without placing a correct amount")
+                            continue
+                    from_currency = full_text[2].upper()
+                    to_currency = full_text[4].upper()
                     url1 = f"{endpoint_base}{from_currency}"
                     response1 = requests.get(url1)
                     url2 = f"{endpoint_base}{to_currency}"
@@ -71,12 +62,53 @@ while True:
                         print(sell1,sell2)
                     else:
                         print("request failed")
-                    final_result = round(float(sell2) / float(sell1),3)
-                    reply=f"One {from_currency} to {to_currency} is {final_result} {name2}"
+                    final_result = round(float(sell2) / float(sell1), 3) * amount
+                    reply=f"{amount} {from_currency} to {to_currency} is {final_result} {name2}"
                     client.create_tweet(in_reply_to_tweet_id=tweet.id,text=reply)
+                # if len(full_text) == 1:
+                #     print("entered one input")
+                #     client.create_tweet(in_reply_to_tweet_id=tweet.id,text="You mentioned the twitter bot handle without placing an isocode e.g @streetrates ngn")
+                    
+                # elif len(full_text) == 2:
+                #     print("entered two input")
+                #     first = full_text[1].upper()
+                #     url = f"{endpoint_base}{first}"
+                #     response = requests.get(url)
+                #     data = response.json()
+                #     name = data["data"]["name"]
+                #     if data["success"]:
+                #         sell = data["data"]["rate"]["parallel_sell"]
+                #     else:
+                #         print("request failed")
+                #     reply=f"One USD to {first} is {sell} {name}"
+                #     client.create_tweet(in_reply_to_tweet_id=tweet.id,text=reply)
+                    
+                # elif len(full_text) == 3:
+                #     print("entered three input")
+                #     from_currency = full_text[1].upper()
+                #     to_currency = full_text[2].upper()
+                #     url1 = f"{endpoint_base}{from_currency}"
+                #     response1 = requests.get(url1)
+                #     url2 = f"{endpoint_base}{to_currency}"
+                #     response2 = requests.get(url2)
+                #     data1 = response1.json()
+                #     name1 = data1["data"]["name"]
+                #     data2 = response2.json()
+                #     print(data1,data2)
+                #     name2 = data2["data"]["name"]
+                #     if data1["success"] and data2["success"]:
+                #         sell1 = data1["data"]["rate"]["parallel_buy"] or data1["data"]["rate"]["parallel_sell"]
+                #         sell2 = data2["data"]["rate"]["parallel_buy"] or data2["data"]["rate"]["parallel_sell"]
+                #         print(sell1,sell2)
+                    # else:
+                    #     print("request failed")
+                    # final_result = round(float(sell2) / float(sell1),3)
+                    # reply=f"One {from_currency} to {to_currency} is {final_result} {name2}"
+                    # client.create_tweet(in_reply_to_tweet_id=tweet.id,text=reply)
                 else:
-                    reply = f"Pls enter in the format required"
+                    reply = f"Pls enter in the format required, example: @streetrates 10 USD to NGN"
                     print(reply)
+                    client.create_tweet(in_reply_to_tweet_id=tweet.id,text=reply)
                 start_id = tweet.id
             except Exception as error:
                 pass
