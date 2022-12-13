@@ -54,17 +54,17 @@ while True:
                     data1 = response1.json()
                     name1 = data1["data"]["name"]
                     data2 = response2.json()
-                    print(data1,data2)
                     name2 = data2["data"]["name"]
                     if data1["success"] and data2["success"]:
                         sell1 = data1["data"]["rate"]["parallel_buy"] or data1["data"]["rate"]["parallel_sell"]
                         sell2 = data2["data"]["rate"]["parallel_buy"] or data2["data"]["rate"]["parallel_sell"]
-                        print(sell1,sell2)
                     else:
                         print("request failed")
                     final_result = round(float(sell2) / float(sell1), 6) * amount
+                    print(final_result)
                     reply=f"{amount} {from_currency} to {to_currency} is {final_result} {name2}"
                     client.create_tweet(in_reply_to_tweet_id=tweet.id,text=reply)
+                    print(final_result)
                 if len(full_text) == 1:
                     print("entered one input")
                     client.create_tweet(in_reply_to_tweet_id=tweet.id,text="You mentioned the twitter bot handle without placing an isocode e.g @streetrates 10 GBP to USD")
@@ -108,7 +108,6 @@ while True:
                 else:
                     reply = f"Pls enter in the format required, example: @streetrates 10 USD to NGN"
                     print(reply)
-                    start_id = tweet.id
                     client.create_tweet(in_reply_to_tweet_id=tweet.id,text=reply)
                 start_id = tweet.id
             except Exception as error:
