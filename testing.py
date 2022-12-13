@@ -62,7 +62,7 @@ while True:
                         print(sell1,sell2)
                     else:
                         print("request failed")
-                    final_result = round(float(sell2) / float(sell1), 3) * amount
+                    final_result = round(float(sell2) / float(sell1), 6) * amount
                     reply=f"{amount} {from_currency} to {to_currency} is {final_result} {name2}"
                     client.create_tweet(in_reply_to_tweet_id=tweet.id,text=reply)
                 # if len(full_text) == 1:
@@ -108,6 +108,7 @@ while True:
                 else:
                     reply = f"Pls enter in the format required, example: @streetrates 10 USD to NGN"
                     print(reply)
+                    start_id = tweet.id
                     client.create_tweet(in_reply_to_tweet_id=tweet.id,text=reply)
                 start_id = tweet.id
             except Exception as error:
