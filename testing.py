@@ -1,6 +1,6 @@
 import tweepy
+import os
 import pytz
-from app.core import settings
 import requests
 import asyncio
 from datetime import datetime, time, timedelta
@@ -8,11 +8,11 @@ import time
 from app.utils import get_binancep2p_rate,format_binance_response_data
 
 iso_code_list = set(("ARS","EUR","USD","AED","AUD","BDT","BHD","BOB","BRL","CAD","CLP","CNY","COP","CRC","CZK","DOP","DZD","EGP","GBP","GEL","GHS","HKD","IDR","INR","JPY","KES","KHR","KRW","KWD","KZT","LAK","LBP","LKR","MAD","MMK","MXN","MYR","NGN","OMR","PAB","PEN","PHP","PKR","PLN","PYG","QAR","RON","RUB","SAR","SDG","SEK","SGD","THB","TND","TRY","TWD","UAH","UGX","UYU","VES","VND","ZAR"))
-api_key = settings.TWITTER_API_KEY
-api_secret = settings.TWITTER_API_KEY_SECRET
-bearer_token = r"{0}".format(settings.TWITTER_BEARER_TOKEN)
-access_token = settings.TWITTER_ACCESS_TOKEN
-access_token_secret = settings.TWITTER_ACCESS_TOKEN_SECRET
+api_key = os.getenv("TWITTER_API_KEY")
+api_secret = os.getenv("TWITTER_API_KEY_SECRET")
+bearer_token = r"{0}".format(os.getenv("TWITTER_BEARER_TOKEN"))
+access_token = os.getenv("TWITTER_ACCESS_TOKEN")
+access_token_secret = os.getenv("TWITTER_ACCESS_TOKEN_SECRET")
 
 
 client = tweepy.Client(bearer_token, api_key, api_secret, access_token, access_token_secret)
