@@ -61,7 +61,7 @@ while True:
                     else:
                         print("request failed")
                     final_result = round(float(sell2) / float(sell1), 6) * amount
-                    reply=f"{amount} {from_currency} to {to_currency} is {final_result} {name2}"
+                    reply=f"{amount} {name1} is {final_result} {name2}"
                     print(reply)
                     client.create_tweet(in_reply_to_tweet_id=tweet.id,text=reply)
                     print(final_result)
