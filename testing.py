@@ -63,10 +63,12 @@ while True:
                     data1 = response1.json()
                     name1 = data1["data"]["name"]
                     data2 = response2.json()
+                    print(data1,data2)
                     name2 = data2["data"]["name"]
                     if data1["success"] and data2["success"]:
                         sell1 = data1["data"]["rate"]["parallel_sell"]
                         sell2 = data2["data"]["rate"]["parallel_sell"]
+                        print(sell1,sell2)
                     else:
                         print("request failed")
                     final_result = round(float(sell2) / float(sell1),3)
