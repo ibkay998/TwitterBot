@@ -3,5 +3,5 @@ asyncio
 pydantic
 requests
 typing_extensions
-python-telegram-bot
 email-validator
+tweepy
