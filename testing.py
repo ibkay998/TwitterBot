@@ -66,8 +66,8 @@ while True:
                     print(data1,data2)
                     name2 = data2["data"]["name"]
                     if data1["success"] and data2["success"]:
-                        sell1 = data1["data"]["rate"].get("parallel_sell", default="parallel_buy")
-                        sell2 = data2["data"]["rate"].get("parallel_sell", default="parallel_buy")
+                        sell1 = data1["data"]["rate"]["parallel_buy"] or data1["data"]["rate"]["parallel_sell"]
+                        sell2 = data2["data"]["rate"]["parallel_buy"] or data2["data"]["rate"]["parallel_sell"]
                         print(sell1,sell2)
                     else:
                         print("request failed")
