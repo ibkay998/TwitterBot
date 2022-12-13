@@ -81,6 +81,6 @@ while True:
     else:
         print("nothing found")
 
-    time.sleep(14400)
+    time.sleep(60)
 
 
