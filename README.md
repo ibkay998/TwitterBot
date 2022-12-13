@@ -1,2 +1,2 @@
-# telegram-bot-server
-This uses the python telegram bot library to create a telegram bot.
+# twitter-bot-server
+This uses the python tweepy library to create a twitter bot.
