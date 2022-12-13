@@ -70,7 +70,7 @@ while True:
                     else:
                         print("request failed")
                     final_result = round(float(sell2) / float(sell1),3)
-                    reply=f"One {from_currency} to {to_currency} is {final_result} {name}"
+                    reply=f"One {from_currency} to {to_currency} is {final_result} {name2}"
                     client.create_tweet(in_reply_to_tweet_id=tweet.id,text=reply)
                 else:
                     reply = f"Pls enter in the format required"
